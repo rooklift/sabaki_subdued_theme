@@ -86,7 +86,7 @@
         width: .21em;
         height: .21em;
         border-radius: .21em;
-        background: #5E2E0C;
+        background: #000000;
     }
     .goban .row:nth-child(3) li {
         background-image: url('../img/goban/side-n.png');
