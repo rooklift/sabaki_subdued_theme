@@ -1,0 +1,902 @@
+#goban {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 40px;
+}
+
+header, #edit, #scoring, #find, #guess {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 40px;
+        overflow: hidden;
+        transition: top .2s;
+    }
+    header > span {
+        position: absolute;
+        left: 0;
+        right: 50%;
+        top: 0;
+        bottom: 0;
+        padding-left: 10px;
+        padding-right: 30px;
+        overflow: hidden;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    #player_-1 {
+        left: 50%;
+        right: 0;
+        padding-right: 42px;
+        padding-left: 30px;
+        text-align: left;
+    }
+    header > span > .captures {
+        position: relative;
+        top: -1px;
+        display: inline-block;
+        height: 20px;
+        min-width: 10px;
+        border-radius: 10px;
+        padding: 0 5px;
+        margin: 0 5px;
+        background: black;
+        line-height: 20px;
+        text-align: center;
+        opacity: .7;
+        font-size: .8em;
+        transition: opacity .2s;
+    }
+    header .bookmark {
+        position: absolute;
+        left: 10px;
+        top: -42px;
+        width: 12px;
+        height: 20px;
+        background: #a456bb;
+        transition: top .2s;
+    }
+    header .bookmark::before, header .bookmark::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        border-top: 6px solid #a456bb;
+        border-right: 6px solid transparent;
+    }
+    header .bookmark::after {
+        left: 6px;
+        border-right: none;
+        border-left: 6px solid transparent;
+    }
+    .bookmark header .bookmark { top: 0; }
+    header > img, #headermenu, header .undo {
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 35px;
+        height: 22px;
+        margin-left: -17px;
+        margin-top: -11px;
+    }
+    #headermenu, header .undo {
+        left: auto;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        padding: 5px;
+        margin-left: 0;
+        margin-top: -21px;
+    }
+    header .undo {
+        right: auto;
+        left: 0;
+        top: 53px;
+        transition: top .2s, left .2s;
+    }
+    header .undo img, #headermenu img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+    .undoable header .undo { top: 50%; }
+    .bookmark header .undo { left: 32px; }
+    #headermenu:hover, header .undo:hover {
+        background: #222;
+}
+
+#bar {
+        transition: background .2s;
+    }
+    .edit #bar { background: #C4BD64; }
+    .scoring #bar { background: #C42311; }
+    .find #bar { background: #0050C0; }
+    .guess #bar { background: #823499; }
+    .edit #edit, .scoring #scoring, .find #find, .guess #guess {
+        top: 0;
+    }
+    .edit header, .scoring header, .find header, .guess header {
+        top: 40px;
+    }
+    #edit { color: #333; }
+    #edit, #scoring, #find, #guess {
+        top: -40px;
+    }
+    #scoring button, #find button {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        background: #400000;
+        transform: translateY(-50%);
+    }
+    #scoring button:hover, #scoring button:focus { background: #600000; }
+    #scoring button:active, #find button:active { transform: translateY(-46%); }
+    #find button {
+        left: 178px;
+        padding-left: 7px;
+        padding-right: 7px;
+        width: 34px;
+    }
+    #find button { background: #002090; }
+    #find button:hover { background: #001080; }
+    #find button img {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+    #find button:nth-child(2) { left: 212px; }
+    #find input {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        width: 143px;
+        transform: translateY(-50%);
+}
+
+#edit a.close, #scoring a.close, #find a.close, #guess a.close {
+        display: block;
+        position: absolute;
+        right: 4px;
+        top: 0;
+        height: 40px;
+        width: 35px;
+        background: url('../node_modules/octicons/svg/x.svg') center / auto 21px no-repeat;
+        opacity: .5;
+    }
+    #scoring a.close, #find a.close, #guess a.close {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+    #edit a.close:active, #scoring a.close:active,
+    #find a.close:active, #guess a.close:active {
+        opacity: .7;
+    }
+    #edit ul {
+        display: table;
+        margin: 0 auto;
+        overflow: hidden;
+        list-style: none;
+    }
+    #edit ul li {
+        margin: 0 2px;
+        float: left;
+    }
+    #edit ul li a {
+        position: relative;
+        display: block;
+        height: 40px;
+        width: 35px;
+    }
+    .edit #edit ul li a:hover {
+        background: #B3AC53;
+    }
+    .edit #edit ul li.selected a, .edit #edit ul li a:active {
+        background: #A29B42;
+    }
+    #edit ul li a img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+        margin-top: -10px;
+}
+
+#leftsidebar {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        background: #181818;
+        z-index: 10;
+    }
+    #leftsidebar .verticalresizer {
+        position: absolute;
+        top: 0;
+        right: -5px;
+        bottom: 0;
+        width: 5px;
+        cursor: ew-resize;
+        z-index: 10;
+    }
+    .leftsidebar #leftsidebar {
+        display: block;
+    }
+    .leftsidebar #main {
+        left: 400px;
+}
+
+#console {
+        overflow: auto;
+    }
+    #console, #console pre, #console input {
+        color: #d0d0d0;
+        font: 14px/1.3 Consolas, Menlo, Monaco, 'Ubuntu Mono', monospace;
+    }
+    #console pre {
+        margin: 15px;
+    }
+    #console .internal { opacity: .5; }
+    #console .success { color: #FFCC66; }
+    #console .error { color: #F25C3D; }
+    #console .id { color: #CC99CC; }
+    #console .inner form {
+        position: relative;
+        height: 1.3em;
+        margin: .7em 0;
+        background: #222;
+    }
+    #console .inner form label::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1.3em;
+        width: 20px;
+        background: #393939;
+        transition: background-color .5s;
+    }
+    #console .inner form label::after {
+        content: '';
+        display: block;
+        position: absolute;
+        border-left: 10px #393939 solid;
+        border-top: .65em transparent solid;
+        border-bottom: .65em transparent solid;
+        top: 0;
+        left: 20px;
+        height: 0;
+        width: 0;
+        transition: border-left-color .5s;
+    }
+    #console .inner form.waiting label::before { background: #FBF593; }
+    #console .inner form.waiting label::after { border-left-color: #FBF593; }
+    #console .inner form:last-child label::before { background: #F25C3D; }
+    #console .inner form:last-child label::after { border-left-color: #F25C3D; }
+    #console .inner form input {
+        box-sizing: border-box;
+        position: absolute;
+        border: none;
+        top: 0;
+        width: 100%;
+        bottom: 0;
+        padding: 0 10px 0 40px;
+        background: transparent;
+}
+
+.coord {
+        padding: 0 5px;
+        background: #101010;
+        color: white;
+        border-radius: 3px;
+    }
+    .coord:hover {
+        background: #0082F0;
+}
+
+#sidebar {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        background: #111;
+        z-index: 10;
+    }
+    #sidebar .verticalresizer {
+        position: absolute;
+        top: 0;
+        left: -5px;
+        bottom: 0;
+        width: 5px;
+        cursor: ew-resize;
+        z-index: 10;
+    }
+    .sidebar #sidebar {
+        display: block;
+    }
+    .sidebar #main {
+        right: 200px;
+}
+
+#graph {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        left: 0;
+        height: 100%;
+        z-index: 1;
+    }
+    #graph .slider {
+        position: absolute;
+        top: 0;
+        right: -25px;
+        bottom: 0;
+        width: 25px;
+        background: #111;
+        box-shadow: 0 0 10px #111;
+        z-index: 10;
+    }
+    #graph .slider a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        color: #666;
+        font-size: .8em;
+        line-height: 25px;
+        text-align: center;
+        text-decoration: none;
+        transition: color .2s;
+    }
+    #graph .slider a:active { color: #eee; }
+    #graph .slider a.next {
+        top: auto;
+        bottom: 0;
+    }
+    #graph .slider .inner {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        right: 0;
+        bottom: 35px;
+    }
+    #graph .slider .inner span {
+        position: absolute;
+        top: 0%;
+        left: 0;
+        right: 0;
+        height: 20px;
+        margin-top: -10px;
+        background: #393939;
+        color: #ccc;
+        font-size: .7em;
+        line-height: 20px;
+        text-align: center;
+        transition: top .2s, background .2s;
+    }
+    #graph .slider .inner.active span {
+        transition: none;
+    }
+    #graph .slider .inner.active span, #graph .slider .inner span:hover {
+        background: #494949;
+}
+
+#properties {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 0;
+        overflow: auto;
+        color: #d0d0d0;
+        background: #181818;
+        box-shadow: 10px 0 10px #111;
+        transition: height .2s, color .2s, background .2s;
+        z-index: 2;
+    }
+    #properties .edit {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        color: #d0d0d0;
+        z-index: 2;
+    }
+    #properties .edit textarea, #properties .edit input {
+        box-sizing: border-box;
+        position: absolute;
+        padding: 15px;
+        background: transparent;
+        color: #d0d0d0;
+        transition: color .2s;
+    }
+    #properties .edit textarea {
+        top: 51px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 51px);
+        padding-top: 0;
+    }
+    #properties .edit input {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding-right: 10px;
+    }
+    #properties .edit .header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 51px;
+        line-height: 51px;
+    }
+    #properties .edit .header img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 14px;
+        margin-left: 0;
+        padding: 3px;
+        opacity: .8;
+        transition: background .2s;
+    }
+    #properties .edit .header img:hover { background: #B3AC53; }
+    #properties .edit .header div {
+        position: absolute;
+        top: 0;
+        right: 36px;
+        bottom: 0;
+        left: 0;
+    }
+    #properties .edit textarea::-webkit-input-placeholder,
+    #properties .edit input::-webkit-input-placeholder {
+        color: #222;
+        opacity: .5;
+    }
+    .edit #properties {
+        background: #E6DF86;
+        color: #222;
+    }
+    .edit #properties .edit,
+    .edit #properties .edit textarea {
+        display: block;
+        color: #222;
+    }
+    .edit #properties .edit input { color: #555; }
+    .edit #properties .inner, .edit #properties .gm-scrollbar { opacity: 0; }
+    #properties .horizontalresizer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        cursor: ns-resize;
+        z-index: 10;
+    }
+    #properties .inner {
+        margin: 15px;
+        word-wrap: break-word;
+    }
+    #properties .inner .header { color: #999; }
+    #properties .inner .header img.positionstatus,
+    #properties .inner .header img.movestatus {
+        display: none;
+        margin-right: 3px;
+        padding: 2px;
+    }
+    #properties .inner .header.positionstatus img.positionstatus { opacity: .7; }
+    #properties .inner .header.positionstatus img.movestatus {
+        position: relative;
+        top: 5px;
+        margin-left: -17px;
+    }
+    #properties .inner .header:not(.positionstatus) img.movestatus {
+        transform: scale(1.5);
+    }
+    #properties .inner .header.positionstatus img.positionstatus,
+    #properties .inner .header.movestatus img.movestatus {
+        display: inline;
+    }
+    #properties .inner .header img.editbutton {
+        position: relative;
+        top: -1px;
+        right: -1px;
+        margin-left: 15px;
+        padding: 3px;
+        float: right;
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+        opacity: .5;
+        transition: background .2s;
+    }
+    #properties .inner .header img.editbutton:hover {
+        background: white;
+}
+
+#indicator {
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    margin-top: -2px;
+    margin-left: -2px;
+    background: rgba(0, 130, 240, .2);
+    border: 2px solid #0082F0;
+    border-radius: 5px;
+    z-index: 3;
+}
+
+#info, #score, #preferences, #gamechooser {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: -285px;
+        height: 235px;
+        overflow: hidden;
+        padding: 20px;
+        background: rgba(38, 41, 44, .97);
+        color: #eee;
+        transition: bottom .5s;
+        z-index: 15;
+    }
+    #info.show, #score.show, #preferences.show, #gamechooser.show {
+        bottom: 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    }
+    #info input, #info select, button,
+    #preferences input, #preferences select,
+    #gamechooser input {
+        background: #111;
+        color: #eee;
+    }
+    #info input:focus, #info select:focus, button:hover, button:focus,
+    #preferences input:focus, #preferences select:focus,
+    #gamechooser input:focus {
+        background: #1a1a1a;
+    }
+    #preferences input[type="checkbox"]:focus {
+        background: #111;
+    }
+    button:active {
+        position: relative;
+        top: 2px;
+    }
+    #info section {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    #info section .currentplayer {
+        margin: 0 10px;
+    }
+    #info section .menu {
+        margin: 0 2px 5px;
+        padding: 3px;
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+        transition: background .2s;
+    }
+    #info section .menu.active {
+        background: #2FC5E4;
+    }
+    #info section .menu:hover {
+        background: rgba(255, 255, 255, .5);
+    }
+    #info section .menu.active:hover {
+        background: #4FE7F6;
+    }
+    #info.disabled section .menu { display: none; }
+    @media screen and (max-width: 600px) {
+        #info section input { width: 100px; }
+    }
+    #info section input[name$="_1"] { text-align: right; }
+    #info section input[name^="rank"] {
+        width: 40px;
+    }
+    #info ul {
+        height: 152px;
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+    }
+    #info ul li { margin: 0 0 7px 0; }
+    #info form p {
+        position: absolute;
+        right: 20px;
+        bottom: 20px;
+        margin: 0;
+    }
+    #info input[name="komi"], #info input[name="size"] {
+        width: 40px;
+    }
+    #info label span {
+        display: inline-block;
+        width: 6em;
+        margin-right: 10px;
+        text-align: right;
+}
+
+#score {
+        background: rgba(251, 245, 147, .9);
+        color: #333;
+    }
+    #score .tabs {
+        position: absolute;
+        top: 27px;
+        left: 96px;
+        right: 20px;
+        text-align: left;
+    }
+    #score .tabs li a {
+        border-color: rgba(0, 0, 0, .2);
+        color: #333;
+    }
+    #score .tabs li.current a {
+        border-color: transparent;
+        background: rgba(0, 0, 0, .2);
+    }
+    #score .tabs li:not(.current) a:hover {
+        border-color: transparent;
+        background: rgba(0, 0, 0, .1);
+    }
+    #score table {
+        margin: 1em auto;
+        width: 100%;
+        max-width: 750px;
+        border-collapse: collapse;
+    }
+    #score th, #score td {
+        padding: 10px;
+        text-align: right;
+    }
+    #score th {
+        font-weight: normal;
+        font-size: .8em;
+        text-transform: uppercase;
+    }
+    #score td {
+        font-size: 1.5em;
+        font-weight: bold;
+        transition: opacity .2s;
+    }
+    #score table .disabled {
+        opacity: .5;
+    }
+    #score tbody tr:first-child {
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+    #score button {
+        background: rgba(0, 0, 0, .1);
+        color: #333;
+    }
+    #score button:focus, #score button:hover {
+        background: rgba(0, 0, 0, .2);
+}
+
+#preferences {
+        bottom: -440px;
+        height: 400px;
+    }
+    #preferences form ul {
+        margin: 1.5em 0;
+    }
+    #preferences form > p:last-child {
+        position: absolute;
+        right: 20px;
+        bottom: 14px;
+    }
+    #preferences form > div {
+        display: none;
+    }
+    #preferences form.general > div.general,
+    #preferences form.engines > div.engines {
+        display: block;
+    }
+    #preferences .engines-list {
+        overflow: auto;
+    }
+    #preferences input[type="checkbox"]::before {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+}
+
+#gamechooser {
+        height: 100%;
+        bottom: -100%;
+        padding: 0;
+    }
+    #gamechooser > input {
+        position: absolute;
+        top: 23px;
+        right: 20px;
+        width: 15em;
+    }
+    #gamechooser > p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        text-align: right;
+    }
+    #gamechooser .games-list {
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        bottom: 70px;
+        width: auto;
+        height: auto;
+        overflow: auto;
+        background: rgba(0, 0, 0, .2);
+    }
+    #gamechooser h2 {
+        padding: 20px;
+        font-weight: lighter;
+    }
+    #gamechooser ol {
+        list-style: none;
+        margin: 10px;
+    }
+    #gamechooser li {
+        float: left;
+        margin: 10px 10px 20px 10px;
+    }
+    #gamechooser li.insertleft {
+        margin-left: -3px;
+        border-left: 3px solid #0050C0;
+        padding-left: 10px;
+    }
+    #gamechooser li.insertright {
+        margin-right: 0;
+        border-right: 3px solid #0050C0;
+        padding-right: 7px;
+    }
+    #gamechooser li.hide { display: none; }
+    #gamechooser li div {
+        margin: 0 auto;
+        width: 165px;
+    }
+    #gamechooser li div:active { opacity: .5; }
+    #gamechooser li svg {
+        border: 5px solid #ca933a;
+        margin-top: 5px;
+        padding: 1px;
+        background: url('../img/goban/board.png') center #ECB55A;
+        background-size: 200%;
+    }
+    #gamechooser li.add svg {
+        border-color: #393939;
+        background: transparent;
+    }
+    #gamechooser li span {
+        display: block;
+        margin: 3px 0;
+        padding: 0 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    #gamechooser li span::after { content: '\00A0'; }
+    #gamechooser li span.black, #gamechooser li span.white {
+        padding-left: 28px;
+        background: no-repeat url('../img/ui/black.svg') 5px center;
+    }
+    #gamechooser li span.white {
+        background-image: url('../img/ui/white.svg');
+}
+
+.tabs {
+        list-style: none;
+        text-align: center;
+    }
+    .tabs li {
+        display: inline-block;
+    }
+    .tabs li a {
+        display: inline-block;
+        border: 1px solid #1a1a1a;
+        border-left: none;
+        padding: 2px 10px;
+        color: #eee;
+        text-decoration: none;
+        transition: background .2s, border-color .2s;
+    }
+    .tabs li:first-child a {
+        border-left: 1px solid #1a1a1a;
+    }
+    .tabs li.current a {
+        border-color: transparent;
+        background: #111;
+    }
+    .tabs li:not(.current) a:hover, .tabs li:not(.current) a:focus {
+        border-color: transparent;
+        background: #1a1a1a;
+}
+
+.engines-list {
+        border: 1px solid #111;
+        height: 21em;
+        margin: 1.5em 0;
+        background: #1a1a1a;
+        overflow: auto;
+    }
+    .engines-list ul {
+        margin: 0 !important;
+        list-style: none;
+    }
+    .engines-list li {
+        position: relative;
+        margin: 0;
+        padding: 10px;
+        padding-left: 36px;
+    }
+    .engines-list li:nth-child(2n) {
+        background: #1e1e1e;
+    }
+    .engines-list input {
+        box-sizing: border-box;
+        border: none;
+        padding: 0;
+        width: 100%;
+        background: transparent !important;
+    }
+    .engines-list li p input {
+        font: 14px/1.3 Consolas, Menlo, Monaco, 'Ubuntu Mono', monospace;
+    }
+    .engines-list li h3 input {
+        font-size: 1em;
+        font-weight: normal;
+    }
+    .engines-list li h3 + p input {
+        padding-right: 30px;
+        opacity: .5;
+    }
+    .engines-list li > * { margin: 0; }
+    .engines-list li a.remove, .engines-list li a.browse {
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        left: 10px;
+        top: 50%;
+        border-radius: 8px;
+        margin-top: -6px;
+    }
+    .engines-list li a.browse {
+        left: auto;
+        right: 15px;
+        opacity: .5;
+        transition: opacity .2s;
+    }
+    .engines-list li a img {
+        display: block;
+        margin: 1px auto;
+        transform: translateX(-1px);
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+    .engines-list li a.remove:hover {
+        background: #E81123;
+    }
+    .engines-list li a.remove:active {
+        background: #C60001;
+    }
+    .engines-list li a.browse:active {
+        opacity: 1;
+}

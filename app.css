@@ -1,0 +1,167 @@
+@import url('../node_modules/gemini-scrollbar/gemini-scrollbar.css');
+
+/**
+ * app.css
+ *
+ * Provides general styles for websites that behave like apps.
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body { overflow: hidden; height: 100%; }
+
+body, input, button, select, option, textarea {
+    font: menu;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+body, a {
+    cursor: default;
+    overflow: hidden;
+    outline: 0;
+    -webkit-transform-style: preserve-3d;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+pre, code {
+    font: 14px/1.3 Consolas, Menlo, Monaco, 'Ubuntu Mono', monospace;
+}
+
+#main {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+h2 {
+    font-size: 1.7em;
+    font-weight: normal;
+    text-transform: lowercase;
+}
+
+a, img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    object-fit: contain;
+}
+
+#bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 40px;
+    overflow: hidden;
+    text-align: center;
+    background: #26292C;
+    color: #eee;
+    line-height: 40px;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+#busy {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        cursor: wait;
+        z-index: 999;
+    }
+    body.busy #busy {
+        display: block;
+}
+
+form p, form ul li {
+        margin: 7px 0;
+    }
+    form ul {
+        list-style: none;
+    }
+    input[type="text"] {
+        width: 125px;
+    }
+    textarea {
+        resize: none;
+    }
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        display: inline-block;
+        position: relative;
+        height: 1.5em;
+        width: 1.5em;
+        margin-right: 5px;
+        vertical-align: top;
+    }
+    input[type="checkbox"]::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('../node_modules/octicons/svg/check.svg') center / auto 16px no-repeat;
+        opacity: 0;
+        transition: opacity .2s;
+    }
+    input[type="checkbox"]:checked::before {
+        opacity: 1;
+    }
+    input, button, select, textarea {
+        border: 0;
+        padding: 5px 10px;
+    }
+    button {
+        padding: 5px 20px;
+    }
+    input:focus, button:focus, select:focus, textarea:focus {
+        outline: none;
+    }
+    input:disabled, select:disabled, button:disabled, textarea:disabled {
+        opacity: .5;
+    }
+    form > p:last-child {
+        text-align: right;
+}
+
+/**
+ * Gemini Scrollbars
+ */
+
+.gm-scrollbar {
+        bottom: 0;
+        right: 0;
+    }
+    .gm-scrollbar.-vertical {
+        width: 8px;
+        top: 0;
+    }
+    .gm-scrollbar.-horizontal {
+        height: 8px;
+        left: 0;
+    }
+    .gm-scrollbar .thumb {
+        background: #393939;
+        border-radius: 0;
+        cursor: default;
+        transition: background .2s, height .5s, width .5s;
+    }
+    .gm-scrollbar .thumb:hover, .gm-scrollbar .thumb:active {
+        background: #494949;
+    }
+    .gm-scrollbar .thumb:active {
+        transition: none;
+}
