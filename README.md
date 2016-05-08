@@ -2,7 +2,7 @@
 
 Alternate gfx / stylesheet files for [Sabaki SGF editor](https://github.com/yishn/Sabaki).
 
-Last updated to be in parity with: 0.12.4
+Last updated to be in parity with: 0.13.0
 
 Note to self:
 
