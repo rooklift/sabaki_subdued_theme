@@ -1,6 +1,4 @@
 /**
- * goban.css
- *
  * Styles the Go board
  */
 
@@ -47,7 +45,7 @@
         z-index: 0;
     }
     .goban li.sign_1 .stone::before {
-        opacity: .45;
+        opacity: .4;
 }
 
 /**
@@ -148,6 +146,7 @@ body:not(.scoring) .goban .row li.dimmed img {
 
 .goban .row li .stone::after, .goban .row li .stone::after {
         content: '';
+        box-sizing: border-box;
         display: none;
         position: absolute;
         left: 50%;
@@ -156,23 +155,36 @@ body:not(.scoring) .goban .row li.dimmed img {
         height: .5em;
         margin-left: calc(-.25em - 1px);
         margin-top: calc(-.25em - 1px);
-        border-radius: 500em;
-        opacity: .3;
+        border-radius: 100%;
         z-index: 2;
     }
-    .goban .row li.ghost_1 .stone::after,
+
+    .goban.siblings .row li.sign_0.siblingghost_1 .stone::after { background: black; }
+    .goban.siblings .row li.sign_0.siblingghost_-1 .stone::after { background: white; }
+    .goban.siblings .row li.sign_0.siblingghost_1 .stone::after,
+    .goban.siblings .row li.sign_0.siblingghost_-1 .stone::after { opacity: .25; }
+    .goban.siblings:not(.variations) .row li.sign_0.siblingghost_1 .stone::after,
+    .goban.siblings:not(.variations) .row li.sign_0.siblingghost_-1 .stone::after,
+    .goban.variations .row li.sign_0.ghost_1 .stone::after,
+    .goban.variations .row li.sign_0.ghost_-1 .stone::after { opacity: .4; }
+
+    .goban.variations .row li.sign_0.ghost_1 .stone::after,
     .goban .row li.sign_-1.point .stone::after { background: black; }
-    .goban .row li.ghost_-1 .stone::after,
+    .goban.variations .row li.sign_0.ghost_-1 .stone::after,
     .goban .row li.sign_1.point .stone::after { background: white; }
-    .goban.variations .row li.ghost_1 .stone::after,
-    .goban.variations .row li.ghost_-1 .stone::after { display: block; }
-    .goban .row li.point .stone::after {
+
+    body:not(.guess) .goban.siblings .row li.sign_0.siblingghost_1 .stone::after,
+    body:not(.guess) .goban.siblings .row li.sign_0.siblingghost_-1 .stone::after,
+    body:not(.guess) .goban.variations .row li.sign_0.ghost_1 .stone::after,
+    body:not(.guess) .goban.variations .row li.sign_0.ghost_-1 .stone::after { display: block; }
+
+    .goban .row li.sign_1.point .stone::after,
+    .goban .row li.sign_-1.point .stone::after {
         display: block;
         width: 8px;
         height: 8px;
         margin-left: -5px;
         margin-top: -5px;
-        opacity: 1;
 }
 
 .goban .row li .stone span {
@@ -283,26 +295,22 @@ body:not(.scoring) .goban .row li.dimmed img {
     }
     .goban .row li.label .stone span::before {
         content: attr(title);
-        display: block;
+        display: inline-block;
         border: none;
-        width: 1.16em;
+        max-width: 1.67em;
         height: 1.1em;
-        margin-top: calc(-.56em - 1px);
-        margin-left: calc(-.58em - 1px);
         overflow: hidden;
         box-shadow: none;
         font-weight: normal;
         font-size: .6em;
         line-height: .9;
         text-overflow: ellipsis;
+        transform: translate(calc(-50% - 1px), calc(-50% - 1px));
     }
     .goban .row li.smalllabel .stone span::before {
-        width: 1.94em;
+        max-width: 2.2em;
         height: 1.1em;
-        margin-top: calc(-.54em - 1px);
-        margin-left: calc(-.97em - 1px);
         font-size: .36em;
-        line-height: .9;
 }
 
 /**
