@@ -5,7 +5,7 @@
 .goban {
         border: 10px solid #000000;
         padding: 10px 8px 8px 10px;
-        background: url('../img/goban/board.png') center #ECB55A fixed;
+        background: url('../img/goban/board.png') center #d2ac76 fixed;
         color: #5E2E0C;
         text-shadow: 0 1px 0 #D28D32;
     }
