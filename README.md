@@ -6,5 +6,5 @@ Last updated to be in parity with: 0.13.0
 
 The files you need to replace are at:
 
-* `resources/app/style`
-* `resources/app/img/goban`
+* `resources/app/style/`
+* `resources/app/img/goban/`
