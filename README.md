@@ -8,4 +8,4 @@ For installation instructions, see:
 
 Basically, replace the default (empty) `styles.css` file, and copy the other files into the same directory.
 
-![Theme Screenshot](/screenshot.gif?raw=true)
+![Theme Screenshot](/screenshot.gif?raw=true | width=744)
