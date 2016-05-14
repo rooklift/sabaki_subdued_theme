@@ -2,9 +2,8 @@
 
 Alternate gfx / stylesheet files for [Sabaki SGF editor](https://github.com/yishn/Sabaki).
 
-Last updated to be in parity with: 0.13.0
+For installation instructions, see:
 
-The files you need to replace are at:
+* https://github.com/yishn/Sabaki/wiki/Userstyle-Tutorial
 
-* `resources/app/style/`
-* `resources/app/img/goban/`
+Basically, replace the default (empty) `styles.css` file, and copy the other files into the same directory.
