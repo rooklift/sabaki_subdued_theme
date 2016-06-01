@@ -58,11 +58,18 @@
 /* Black border */
 
 .goban {
-        border: 10px solid #000000;
+        border: 7px solid #000000;
+        padding: 10px 8px 8px 10px;
 }
 
 /* Black player bar */
 
 #bar {
     background: #000000;
+}
+
+/* Suppress the "tatami mat" that exists as of 0.15 */
+
+main {
+    background: #000000 center;
 }
