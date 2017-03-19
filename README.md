@@ -2,7 +2,7 @@
 
 Alternate gfx / stylesheet files for [Sabaki SGF editor](https://github.com/yishn/Sabaki) **0.14.0** or later. The screenshot here doesn't do it justice, since GitHub seems to scale it up for some reason:
 
-![Theme Screenshot](/screenshot.gif?raw=true | width=743)
+![Theme Screenshot](https://raw.githubusercontent.com/fohristiwhirl/sabaki_subdued_theme/master/screenshot.gif)
 
 For installation instructions, see:
 
