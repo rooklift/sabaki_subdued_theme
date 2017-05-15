@@ -1,4 +1,4 @@
-# sabaki_subdued_theme
+# Sabaki Subdued Theme
 
 * Theme for [Sabaki SGF editor](https://github.com/yishn/Sabaki) **0.30.4** or later.
 * There are 2 versions here, with thin and thick lines on the goban.
