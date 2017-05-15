@@ -25,34 +25,34 @@
 
 .goban .row li {
     position: relative;
-    background: url('inner.png') center;
+    background: url('inner.svg') center;
 }
 .goban .row li.hoshi::after {
     background: #000000;
 }
 .goban .row:nth-child(3) li {
-    background-image: url('side-n.png');
+    background-image: url('side-n.svg');
 }
 .goban .row:nth-last-child(3) li {
-    background-image: url('side-s.png');
+    background-image: url('side-s.svg');
 }
 .goban .row li:first-child {
-    background-image: url('side-w.png');
+    background-image: url('side-w.svg');
 }
 .goban .row li:last-child {
-    background-image: url('side-e.png');
+    background-image: url('side-e.svg');
 }
 .goban .row:nth-child(3) li:first-child {
-    background-image: url('corner-nw.png');
+    background-image: url('corner-nw.svg');
 }
 .goban .row:nth-child(3) li:last-child {
-    background-image: url('corner-ne.png');
+    background-image: url('corner-ne.svg');
 }
 .goban .row:nth-last-child(3) li:first-child {
-    background-image: url('corner-sw.png');
+    background-image: url('corner-sw.svg');
 }
 .goban .row:nth-last-child(3) li:last-child {
-    background-image: url('corner-se.png');
+    background-image: url('corner-se.svg');
 }
 
 /* Black border */
